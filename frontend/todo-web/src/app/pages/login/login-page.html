@@ -1,0 +1,18 @@
+<h2>Entrar</h2>
+
+<form [formGroup]="loginForm" (ngSubmit)="submit()" class="stack">
+  <label>
+    Usuário
+    <input formControlName="username" autocomplete="username" />
+  </label>
+  <label>
+    Senha
+    <input formControlName="password" type="password" autocomplete="current-password" />
+  </label>
+  @if (loginError()) {
+    <p class="warning">{{ loginError() }}</p>
+  }
+  <button type="submit" [disabled]="loginForm.invalid">Entrar</button>
+</form>
+
+<p class="muted">Usuários de teste: alice / alice e bob / bob.</p>
