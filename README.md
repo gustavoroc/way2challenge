@@ -17,6 +17,10 @@ Os desenhos foram feitos no Excalidraw. O arquivo `.excalidraw` de cada um está
 
 ![Visão geral da solução](docs/diagramas/general-overview.svg)
 
+### Arquitetura offline-first: geração e sincronização de eventos
+
+![Geração de eventos, envio do outbox e atualização da tela no front-end](docs/diagramas/architecture-overview.svg)
+
 ### Fluxo da aplicação: cliente e servidor
 
 ![Fluxo da aplicação no cliente e no servidor](docs/diagramas/application-flow.svg)
