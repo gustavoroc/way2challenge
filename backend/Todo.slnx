@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Consumer.Api/Consumer.Api.csproj" />
+  <Project Path="Todo.Api/Todo.Api.csproj" />
+  <Project Path="Todo.Tests/Todo.Tests.csproj" />
+</Solution>

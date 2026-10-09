@@ -1,0 +1,44 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: todo
+      POSTGRES_USER: todo
+      POSTGRES_PASSWORD: todo
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U todo -d todo"]
+      interval: 2s
+      retries: 30
+
+  api:
+    build:
+      context: ./backend
+      args:
+        PROJECT: Todo.Api
+    environment:
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__Todo: Host=postgres;Port=5432;Database=todo;Username=todo;Password=todo
+      Consumer__Url: http://consumer:8080
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  consumer:
+    build:
+      context: ./backend
+      args:
+        PROJECT: Consumer.Api
+    environment:
+      ASPNETCORE_URLS: http://+:8080
+      Consumer__FailureRate: "0"
+    ports:
+      - "8081:8080"
+
+volumes:
+  postgres-data:
