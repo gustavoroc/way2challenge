@@ -1,0 +1,20 @@
+<header>
+  <a routerLink="/tasks" class="title">Todo List</a>
+  @if (session(); as session) {
+    <span class="sync-status" [attr.data-status]="syncStatus()">{{ syncStatusLabel() }}</span>
+    <span class="muted">{{ nextSyncLabel() }}</span>
+    <span class="muted">{{ session.username }}</span>
+    <button type="button" class="secondary" (click)="logout()">Sair</button>
+  }
+</header>
+
+@if (syncStatus() === 'session_expired') {
+  <p class="warning">
+    Sua sessão expirou. As tarefas continuam salvas neste aparelho.
+    <a routerLink="/login">Entrar de novo</a> para sincronizar.
+  </p>
+}
+
+<main>
+  <router-outlet />
+</main>
