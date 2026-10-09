@@ -5,10 +5,31 @@ Lista de tarefas que funciona sem internet no celular e no desktop, sincroniza s
 - **Frontend:** Angular 22 (PWA, signals, IndexedDB via Dexie), em `frontend/todo-web`.
 - **Backend:** ASP.NET Core / .NET 10 com PostgreSQL 16, em `backend/Todo.Api`.
 - **Consumidor externo simulado:** ASP.NET Core, em `backend/Consumer.Api`.
-- **Diagramas:** em [`docs/diagramas`](docs/diagramas):
-  - [visão geral](docs/diagramas/visao-geral.md);
-  - [sincronização offline](docs/diagramas/sincronizacao-offline.md);
-  - [integração externa](docs/diagramas/integracao-externa.md).
+- **Diagramas:** na seção abaixo e em [`docs/diagramas`](docs/diagramas).
+
+---
+
+## Diagramas
+
+Os desenhos foram feitos no Excalidraw. O arquivo `.excalidraw` de cada um está ao lado do `.svg` e abre em [excalidraw.com](https://excalidraw.com).
+
+### Visão geral da solução
+
+![Visão geral da solução](docs/diagramas/general-overview.svg)
+
+### Fluxo da aplicação: cliente e servidor
+
+![Fluxo da aplicação no cliente e no servidor](docs/diagramas/application-flow.svg)
+
+### Algoritmos: persistência no servidor e offline-first no navegador
+
+![Algoritmos de persistência no servidor e offline-first no navegador](docs/diagramas/algorithm-diagrams.svg)
+
+### Diagramas de sequência detalhados (Mermaid)
+
+- [Visão geral](docs/diagramas/visao-geral.md).
+- [Sincronização offline](docs/diagramas/sincronizacao-offline.md): da gravação no aparelho até a reconciliação no servidor.
+- [Integração externa](docs/diagramas/integracao-externa.md): do servidor até o consumidor.
 
 ---
 
