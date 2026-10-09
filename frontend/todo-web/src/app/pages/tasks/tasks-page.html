@@ -1,0 +1,57 @@
+<div class="row">
+  <h2>Tarefas</h2>
+  <a class="button" routerLink="/tasks/new">Nova tarefa</a>
+</div>
+
+<form [formGroup]="filterForm" class="filters">
+  <input formControlName="searchText" placeholder="Buscar no título ou descrição" />
+  <select formControlName="status">
+    <option value="all">Todos os status</option>
+    <option value="pending">{{ statusLabels.pending }}</option>
+    <option value="done">{{ statusLabels.done }}</option>
+  </select>
+  <select formControlName="priority">
+    <option value="all">Todas as prioridades</option>
+    @for (priority of priorities; track priority) {
+      <option [value]="priority">{{ priorityLabels[priority] }}</option>
+    }
+  </select>
+  <select formControlName="category">
+    <option value="">Todas as categorias</option>
+    @for (category of categoriesInUse(); track category) {
+      <option [value]="category">{{ category }}</option>
+    }
+  </select>
+</form>
+
+<ul class="tasks">
+  @for (task of filteredAndSortedTasks(); track task.id) {
+    <li [class.done]="task.status === 'done'">
+      <div class="task">
+        <strong>{{ task.title }}</strong>
+        @if (isUrgent(task)) {
+          <span class="tag urgent">Urgente</span>
+        }
+        <span class="tag">{{ priorityLabels[task.priority] }}</span>
+        @if (task.category) {
+          <span class="tag">{{ task.category }}</span>
+        }
+        @if (task.dueDate) {
+          <span class="muted">vence {{ task.dueDate }}</span>
+        }
+        @if (task.description) {
+          <p class="muted">{{ task.description }}</p>
+        }
+      </div>
+      @if (task.status === 'done') {
+        <button type="button" class="secondary" (click)="reopen(task)">Reabrir</button>
+      } @else {
+        <button type="button" (click)="complete(task)">Concluir</button>
+      }
+      <a [routerLink]="['/tasks', task.id, 'edit']">Editar</a>
+      <button type="button" class="secondary" (click)="remove(task)">Remover</button>
+    </li>
+  } @empty {
+    <li class="muted">Nenhuma tarefa.</li>
+  }
+</ul>

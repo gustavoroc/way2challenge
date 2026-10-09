@@ -1,0 +1,32 @@
+<h2>{{ taskId() ? 'Editar tarefa' : 'Nova tarefa' }}</h2>
+
+<form [formGroup]="taskForm" (ngSubmit)="save()" class="stack">
+  <label>
+    Título
+    <input formControlName="title" [maxlength]="limits.title" />
+  </label>
+  <label>
+    Descrição
+    <textarea formControlName="description" rows="4" [maxlength]="limits.description"></textarea>
+  </label>
+  <label>
+    Vencimento
+    <input formControlName="dueDate" type="date" />
+  </label>
+  <label>
+    Prioridade
+    <select formControlName="priority">
+      @for (priority of priorities; track priority) {
+        <option [value]="priority">{{ priorityLabels[priority] }}</option>
+      }
+    </select>
+  </label>
+  <label>
+    Categoria
+    <input formControlName="category" [maxlength]="limits.category" placeholder="ex.: Trabalho" />
+  </label>
+  <div class="row">
+    <button type="submit" [disabled]="taskForm.invalid">Salvar</button>
+    <a routerLink="/tasks">Cancelar</a>
+  </div>
+</form>
